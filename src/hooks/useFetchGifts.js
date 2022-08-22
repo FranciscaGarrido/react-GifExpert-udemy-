@@ -1,0 +1,28 @@
+import { useEffect, useState } from "react";
+import { getGifts } from "../helpers/getGifts";
+
+export const useFetchGifts = ( category ) => {
+
+    const [images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const getImages = async() => {
+        const newImages = await getGifts(category);
+        setImages(newImages);
+        setIsLoading(false);
+    }
+
+    useEffect( () => { 
+        getImages();
+    }, []);
+    
+
+    //console.log('lala',images);
+
+  return {
+    images,
+    isLoading 
+  }
+
+
+}
